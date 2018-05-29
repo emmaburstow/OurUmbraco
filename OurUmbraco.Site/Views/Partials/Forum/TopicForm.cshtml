@@ -3,104 +3,115 @@
 
 <div class="markdown-spacer"></div>
 <div id="markdown-editor" class="markdown-editor">
-    <div class="container">
-        <div class="row reply-to">
-            <div class="col-sm-6">
-                <p>Write your reply to: <a class="reply-name" href=""></a></p>
-            </div>
-            <div class="col-sm-6">
-                <p id="writing-notification"></p>
-            </div>
-        </div>
+	<div class="container">
 
-        <div class="row create-topic">
-            <div class="col-sm-6">
-                <input id="topic-title" class="markdown-control" name="topic-title" type="text" placeholder="Enter topic title">
-            </div>
+		<div class="row reply-to">
+			<div class="col-sm-6">
+				<p>Write your reply to: <a class="reply-name" href=""></a></p>
+			</div>
+			<div class="col-sm-6">
+				<p id="writing-notification"></p>
+			</div>
+		</div>
+		<div class="row create-topic">
 
-            @if (CurrentPage.Parent.DocumentTypeAlias != "Project")
-            {
-                var categories = Model.Content.AncestorOrSelf(2).Children.Where(m => m.NewTopicsAllowed()).ToList();
-                var categoriesIncludeCurrentPage = categories.Any(x => x.Id == Model.Content.Id);
+			<div class="row">
+				<a href="#"><span class="markdown-close -align-right">Finish me later</span></a>
+			</div>
+                
+         
+		</div>
 
-                <div class="col-sm-3 col-xs-6">
-                    <select name="topic-category" id="topic-category" class="markdown-control">
-                        @if (categoriesIncludeCurrentPage)
-                        {
-                            <option value="" disabled="">Choose a category</option>
-                        }
-                        else
-                        {
-                            <option value="" selected="" disabled="">Choose a category</option>
-                        }
-                        @foreach (var cat in categories)
-                        {
-                            <option class="@cat.Name.ToLower().Replace(" ", "")" value="@cat.Id" selected="@(cat.Id == Model.Content.Id ? "" : null)">@cat.Name</option>
-                        }
-                    </select>
-                </div>
-            }
+		<div class="row create-topic">
+			<div class="col-sm-6">
 
-            <div class="col-sm-3 col-xs-6">
-                <select name="topic-version" id="topic-version" class="markdown-control">
-                    <option value="Choose a version" selected="" disabled="">Choose version</option>
-                    <option value="7">Umbraco v7</option>
-                    <option value="6">Umbraco v6</option>
-                    <option value="4">Umbraco v4</option>
-                </select>
-            </div>
+				<input id="topic-title" class="markdown-control" name="topic-title" type="text" placeholder="Enter topic title">
+			</div>
 
-            @if (CurrentPage.Parent.DocumentTypeAlias == "Project")
-            {
-                <div class="col-sm-3 col-xs-6">
-                    <select name="topic-category" id="topic-category" class="markdown-control" style="display: none;">
-                        <option class="@CurrentPage.Name.ToLower().Replace(" ", "")" value="@CurrentPage.Id" selected>@CurrentPage.Name</option>
-                    </select>
-                </div>
-            }
-        </div>
+			@*@if (CurrentPage.Parent.DocumentTypeAlias != "Project")
+                {
+                    var categories = Model.Content.AncestorOrSelf(2).Children.Where(m => m.NewTopicsAllowed()).ToList();
+                    var categoriesIncludeCurrentPage = categories.Any(x => x.Id == Model.Content.Id);
 
-        <div class="row hidden-xs">
-            <div class="col-md-12">
-                <div id="wmd-button-bar"></div>
-            </div>
-        </div>
-        <div class="row input-row">
-            <div id="input-container" class="col-md-6">
-                <label>Editor</label>
-                <textarea name="" id="wmd-input" cols="30" rows="10" class="wmd-input markdown-control"></textarea>
-            </div>
-            <div id="preview-container" class="col-md-6">
-                <label>Preview</label>
-                <div id="wmd-preview" class="wmd-panel wmd-preview markdown-syntax"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-8">
-                <input class="button tiny markdown-control" type="button" value="Post reply" id="topic-submit">
-                <div id="posting"><div class="loader"></div></div>
-            </div>
-            <div class="col-xs-4 visible-xs visible-sm">
-                <button id="mobile-preview" class="markdown-control">
-                    <i class="icon-Eye"></i> <span>Preview</span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <span class="markdown-close icon-Page-down"></span>
-    <div class="draft">Draft</div>
+                    <div class="col-sm-3 col-xs-6">
+                        <select name="topic-category" id="topic-category" class="markdown-control">
+                            @if (categoriesIncludeCurrentPage)
+                            {
+                                <option value="" disabled="">Choose a category</option>
+                            }
+                            else
+                            {
+                                <option value="" selected="" disabled="">Choose a category</option>
+                            }
+                            @foreach (var cat in categories)
+                            {
+                                <option class="@cat.Name.ToLower().Replace(" ", "")" value="@cat.Id" selected="@(cat.Id == Model.Content.Id ? "" : null)">@cat.Name</option>
+                            }
+                        </select>
+                    </div>
+                }*@
+
+			<div class="col-sm-6 col-xs-6">
+				<select name="topic-version" id="topic-version" class="markdown-control">
+					<option value="Choose a version" selected="" disabled="">Choose version</option>
+					<option value="7">Umbraco v7</option>
+					<option value="6">Umbraco v6</option>
+					<option value="4">Umbraco v4</option>
+				</select>
+			</div>
+
+
+			@if (CurrentPage.Parent.DocumentTypeAlias == "Project")
+			{
+				<div class="col-sm-3 col-xs-6">
+					<select name="topic-category" id="topic-category" class="markdown-control" style="display: none;">
+						<option class="@CurrentPage.Name.ToLower().Replace(" ", "")" value="@CurrentPage.Id" selected>@CurrentPage.Name</option>
+					</select>
+				</div>
+			}
+		</div>
+
+		<div class="row hidden-xs">
+			<div class="col-md-12">
+				<div id="wmd-button-bar"></div>
+			</div>
+		</div>
+		<div class="row input-row">
+			<div id="input-container" class="col-sm-12">
+				<label>Ask your question</label>
+				<textarea name="" id="wmd-input" cols="30" rows="10" class="wmd-input markdown-control"></textarea>
+			</div>
+			@*<div id="preview-container" class="col-md-6">
+                    <label>Preview</label>
+                    <div id="wmd-preview" class="wmd-panel wmd-preview markdown-syntax"></div>
+                </div>*@
+		</div>
+		<div class="row">
+			<div class="col-xs-8">
+				<input class="button tiny markdown-control" type="button" value="Post reply" id="topic-submit">
+				<div id="posting"><div class="loader"></div></div>
+			</div>
+			<div class="col-xs-4 ">
+				<button id="mobile-preview" class="markdown-control">
+					<i class="icon-Eye"></i> <span>Preview</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="draft">Draft</div>
 </div>
 
 <div id="insert-image-dialog" class="wmd-prompt-dialog" style="display: none;">
-    <div style="padding: 5px;">
-        <p><b>Upload image</b></p>
-        <p>Image will be uploaded when post is submitted</p>
-        <div class="span" style="display:none;"><div class=" loader"></div></div>
-        <input type="file" name="file" id="file" data-action="/umbraco/api/forum/editorupload" />
-        <div style="text-align:center;">
-            <input type="button" value="Cancel" style="margin: 10px; display: inline; width: 7em;">
-        </div>
-    </div>
+	<div style="padding: 5px;">
+		<p><b>Upload image</b></p>
+		<p>Image will be uploaded when post is submitted</p>
+		<div class="span" style="display:none;"><div class=" loader"></div></div>
+		<input type="file" name="file" id="file" data-action="/umbraco/api/forum/editorupload" />
+		<div style="text-align:center;">
+			<input type="button" value="Cancel" style="margin: 10px; display: inline; width: 7em;">
+		</div>
+	</div>
 
 </div>
 
@@ -152,7 +163,7 @@
             <a href="#" data-topic="{{topicId}}" data-parent="{{id}}" data-controller="comment" class="forum-reply reply">
                 <i class="icon-Reply-arrow"></i><span>Reply</span>
             </a>
-            
+
             <a href="#" class="edit-post" data-id="{{id}}" data-topic="{{topicId}}" data-controller="comment">
                 <i class="icon-Edit"></i><span>Edit</span>
             </a>
